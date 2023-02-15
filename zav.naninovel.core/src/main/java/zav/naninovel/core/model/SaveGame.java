@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.zip.Deflater;
@@ -45,16 +47,20 @@ public class SaveGame {
 	// @formatter:on
 	private final ObjectMapper om;
 	private final GameStateMap gameStateMap;
+	private final File source;
 
 	public SaveGame(File source) throws IOException {
-		om = new ObjectMapper();
-		SimpleModule module = new SimpleModule();
+		this.om = new ObjectMapper();
 
+		SimpleModule module = new SimpleModule();
 		module.addDeserializer(SerializableMap.class, new SerializableMapDeserializer());
 		module.addSerializer(SerializableMap.class, new SerializableMapSerializer());
-		om.registerModule(module);
 
-		gameStateMap = om.readValue(decompress(source, 3), GameStateMap.class);
+		this.om.registerModule(module);
+
+		this.gameStateMap = om.readValue(decompress(source, 3), GameStateMap.class);
+
+		this.source = source;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -80,6 +86,18 @@ public class SaveGame {
 		System.out.println(saveGame.getChoiceHandlerPanel());
 		System.out.println(saveGame.getCameraManager());
 		System.out.println(saveGame.getAudioManager());
+	}
+
+	public String getName() {
+		return source.getName();
+	}
+
+	public byte[] getThumbnail() {
+		return Base64.getDecoder().decode(gameStateMap.getThumbnailBase64());
+	}
+
+	public Date getSaveDateTime() {
+		return gameStateMap.getSaveDateTime();
 	}
 
 	public ActorManager getBackgroundActor() {
