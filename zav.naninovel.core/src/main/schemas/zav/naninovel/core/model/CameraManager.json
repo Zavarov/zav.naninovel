@@ -17,7 +17,7 @@
             "$ref" : "CameraLookState.json"
         },
         "CameraComponents" : {
-            "type" : "arrays",
+            "type" : "array",
             "items" : {
                 "$ref" : "CameraComponentState.json"
             }

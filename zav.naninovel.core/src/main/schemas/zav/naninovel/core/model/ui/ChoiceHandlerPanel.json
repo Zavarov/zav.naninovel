@@ -5,7 +5,7 @@
             "type" : "boolean"
         },
         "Buttons" : {
-            "type" : "arrays",
+            "type" : "array",
             "items" : {
                 "$ref" : "classpath:/zav/naninovel/core/model/ChoiceState.json"
             }

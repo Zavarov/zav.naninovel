@@ -2,19 +2,19 @@
     "type" : "object",
     "properties" : {
         "BgmClips" : {
-            "type" : "arrays",
+            "type" : "array",
             "items" : {
                 "$ref" : "AudioClipState.json"
             }
         },
         "AmbientClips" : {
-            "type" : "arrays",
+            "type" : "array",
             "items" : {
                 "$ref" : "AudioClipState.json"
             }
         },
         "SfxClips" : {
-            "type" : "arrays",
+            "type" : "array",
             "items" : {
                 "$ref" : "AudioClipState.json"
             }
