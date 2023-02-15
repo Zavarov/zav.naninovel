@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.zip.Deflater;
 import java.util.zip.DeflaterInputStream;
@@ -48,6 +50,9 @@ public class SaveGame {
 	private final ObjectMapper om;
 	private final GameStateMap gameStateMap;
 	private final File source;
+
+	// Convert each object only once...
+	private final Map<GameState, Object> cache = new HashMap<>();
 
 	public SaveGame(File source) throws IOException {
 		this.om = new ObjectMapper();
@@ -101,83 +106,91 @@ public class SaveGame {
 	}
 
 	public ActorManager getBackgroundActor() {
-		return readValue(find(BACKGROUND_ACTOR), ActorManager.class);
+		return find(BACKGROUND_ACTOR, ActorManager.class);
 	}
 
 	public ActorManager getTextPrinterActor() {
-		return readValue(find(TEXT_PRINTER_ACTOR), ActorManager.class);
+		return find(TEXT_PRINTER_ACTOR, ActorManager.class);
 	}
 
 	public ActorManager getCharacterActor() {
-		return readValue(find(CHARACTER_ACTOR), ActorManager.class);
+		return find(CHARACTER_ACTOR, ActorManager.class);
 	}
 
 	public ActorManager getChoiceHandlerActor() {
-		return readValue(find(BACKGROUND_ACTOR), ActorManager.class);
+		return find(BACKGROUND_ACTOR, ActorManager.class);
 	}
 
 	public CustomVariableManager getCustomVariableManager() {
-		return readValue(find(CUSTOM_VARIABLE_MANAGER), CustomVariableManager.class);
+		return find(CUSTOM_VARIABLE_MANAGER, CustomVariableManager.class);
 	}
 
 	public InventoryUI getInventoryUI() {
-		return readValue(find(INVENTORY_UI), InventoryUI.class);
+		return find(INVENTORY_UI, InventoryUI.class);
 	}
 
 	public InputManager getInputManager() {
-		return readValue(find(INPUT_MANAGER), InputManager.class);
+		return find(INPUT_MANAGER, InputManager.class);
 	}
 
 	public CharacterManager getCharacterManager() {
-		return readValue(find(CHARACTER_MANAGER), CharacterManager.class);
+		return find(CHARACTER_MANAGER, CharacterManager.class);
 	}
 
 	public TextPrinterManager getTextPrinterManager() {
-		return readValue(find(TEXT_PRINTER_MANAGER), TextPrinterManager.class);
+		return find(TEXT_PRINTER_MANAGER, TextPrinterManager.class);
 	}
 
 	public ScriptPlayer getScriptPlayer() {
-		return readValue(find(SCRIPT_PLAYER), ScriptPlayer.class);
+		return find(SCRIPT_PLAYER, ScriptPlayer.class);
 	}
 
 	public BacklogPanel getBacklogPanel() {
-		return readValue(find(BACKLOG_PANEL), BacklogPanel.class);
+		return find(BACKLOG_PANEL, BacklogPanel.class);
 	}
 
 	public VariableInputPanel getVariableInputPanel() {
-		return readValue(find(VARIABLE_INPUT_PANEL), VariableInputPanel.class);
+		return find(VARIABLE_INPUT_PANEL, VariableInputPanel.class);
 	}
 
 	public SpawnManager getSpawnManager() {
-		return readValue(find(SPAWN_MANAGER), SpawnManager.class);
+		return find(SPAWN_MANAGER, SpawnManager.class);
 	}
 
 	public ChoiceHandlerPanel getChoiceHandlerPanel() {
-		return readValue(find(CHOICE_HANDLER_PANEL), ChoiceHandlerPanel.class);
+		return find(CHOICE_HANDLER_PANEL, ChoiceHandlerPanel.class);
 	}
 
 	public CameraManager getCameraManager() {
-		return readValue(find(CAMERA_MANAGER), CameraManager.class);
+		return find(CAMERA_MANAGER, CameraManager.class);
 	}
 
 	public AudioManager getAudioManager() {
-		return readValue(find(AUDIO_MANAGER), AudioManager.class);
+		return find(AUDIO_MANAGER, AudioManager.class);
 	}
 
-	protected String find(GameState gameState) {
+	protected <T> T find(GameState gameState, Class<T> clazz) {
+		Object value = cache.get(gameState);
+
+		if (value != null) {
+			return clazz.cast(value);
+		}
+
 		List<String> keys = gameStateMap.getObjectJsonMap().getKeys();
 		List<Object> values = gameStateMap.getObjectJsonMap().getValues();
 
 		for (int i = 0; i < keys.size(); ++i) {
 			if (gameState.toString().equals(keys.get(i))) {
-				return (String) values.get(i);
+				T result = readValue((String) values.get(i), clazz);
+				cache.put(gameState, result);
+				return result;
 			}
 		}
 
 		throw new NoSuchElementException(gameState.toString());
 	}
 
-	protected <T> T readValue(String source, Class<T> target) {
+	private <T> T readValue(String source, Class<T> target) {
 		try {
 			return om.readValue(source, target);
 		} catch (IOException e) {
