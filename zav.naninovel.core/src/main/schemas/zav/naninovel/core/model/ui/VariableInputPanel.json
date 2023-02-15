@@ -1,0 +1,17 @@
+{
+    "type" : "object",
+    "properties" : {
+        "VariableName" : {
+            "type" : "string"
+        },
+        "SummaryText" : {
+            "type" : "string"
+        },
+        "InputFieldText" : {
+            "type" : "string"
+        },
+        "PlayOnSubmit" : {
+            "type" : "boolean"
+        }
+    }
+}

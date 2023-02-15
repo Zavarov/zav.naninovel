@@ -1,0 +1,14 @@
+{
+    "type" : "object",
+    "properties" : {
+        "scriptName" : {
+            "type" : "string"
+        },
+        "lineIndex" : {
+            "type" : "integer"
+        },
+        "inlineIndex" : {
+            "type" : "integer"
+        }
+    }
+}

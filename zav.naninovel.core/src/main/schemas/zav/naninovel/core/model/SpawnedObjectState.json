@@ -1,0 +1,23 @@
+{
+    "type" : "object",
+    "properties" : {
+        "path" : {
+            "type" : "string"
+        },
+        "parameters" : {
+            "type" : "array",
+            "items" : {
+                "type" : "string"
+            }
+        },
+        "position" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Vector3.json"
+        },
+        "rotation" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Quaternion.json"
+        },
+        "scale" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Vector3.json"
+        }
+    }
+}

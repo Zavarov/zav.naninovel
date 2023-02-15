@@ -1,0 +1,11 @@
+{
+    "type" : "object",
+    "properties" : {
+        "Messages" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "classpath:/zav/naninovel/core/model/BacklogMessageState.json"
+            }
+        }
+    }
+}

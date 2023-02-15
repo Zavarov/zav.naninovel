@@ -1,0 +1,11 @@
+{
+    "type" : "object",
+    "properties" : {
+        "SpawnedObjects" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "SpawnedObjectState.json"
+            }
+        }
+    }
+}

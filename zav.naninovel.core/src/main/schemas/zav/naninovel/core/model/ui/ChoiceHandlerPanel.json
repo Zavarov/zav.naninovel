@@ -1,0 +1,14 @@
+{
+    "type" : "object",
+    "properties" : {
+        "RemoveAllButtonsPending" : {
+            "type" : "boolean"
+        },
+        "Buttons" : {
+            "type" : "arrays",
+            "items" : {
+                "$ref" : "classpath:/zav/naninovel/core/model/ChoiceState.json"
+            }
+        }
+    }
+}

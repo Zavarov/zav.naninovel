@@ -1,0 +1,11 @@
+{
+    "type" : "object",
+    "properties" : {
+        "typeName" : {
+            "type" : "string"
+        },
+        "enabled" : {
+            "type" : "boolean"
+        }
+    }
+}

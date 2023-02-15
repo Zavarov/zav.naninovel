@@ -1,0 +1,14 @@
+{
+    "type" : "object",
+    "properties" : {
+        "path" : {
+            "type" : "string"
+        },
+        "volume" : {
+            "type" : "number"
+        },
+        "looped" : {
+            "type" : "boolean"
+        }
+    }
+}

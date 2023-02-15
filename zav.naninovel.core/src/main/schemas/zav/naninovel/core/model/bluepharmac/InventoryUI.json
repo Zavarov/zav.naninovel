@@ -1,0 +1,14 @@
+{
+    "type" : "object",
+    "properties" : {
+        "Position" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Vector3.json"
+        },
+        "Slots" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "InventorySlot.json"
+            }
+        }
+    }
+}

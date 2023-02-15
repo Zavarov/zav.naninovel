@@ -1,0 +1,17 @@
+{
+    "type" : "object",
+    "properties" : {
+        "enabled" : {
+            "type" : "boolean"
+        },
+        "gravity" : {
+            "type" : "boolean"
+        },
+        "zone" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Vector2.json"
+        },
+        "speed" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Vector2.json"
+        }
+    }
+}

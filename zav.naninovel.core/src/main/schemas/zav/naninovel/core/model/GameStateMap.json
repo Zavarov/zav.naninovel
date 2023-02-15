@@ -1,0 +1,22 @@
+{
+    "type" : "object",
+    "extends" : {
+        "$ref" : "StateMap.json"
+    },
+    "properties" : {
+        "playbackSpot" : {
+            "$ref" : "PlaybackSpot.json"
+        },
+        "saveDateTime" : {
+            "type" : "string",
+            "format" : "date-time",
+            "customPattern" : "yyyy-MM-dd HH:mm:ss"
+        },
+        "thumbnailBase64" : {
+            "type" : "string"
+        },
+        "rollbackStackJson" : {
+            "type" : "string"
+        }
+    }
+}

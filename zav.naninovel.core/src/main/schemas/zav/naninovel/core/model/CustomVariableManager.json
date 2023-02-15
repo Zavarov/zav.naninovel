@@ -1,0 +1,8 @@
+{
+    "type" : "object",
+    "properties" : {
+        "LocalVariableMap" : {
+            "$ref" : "SerializableMap.json"
+        }
+    }
+}

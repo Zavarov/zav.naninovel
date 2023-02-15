@@ -1,0 +1,29 @@
+{
+    "type" : "object",
+    "properties" : {
+        "Offset" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Vector3.json"
+        },
+        "Rotation" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Quaternion.json"
+        },
+        "Zoom" : {
+            "type" : "number"
+        },
+        "Orthographic" : {
+            "type" : "boolean"
+        },
+        "LookMode" : {
+            "$ref" : "CameraLookState.json"
+        },
+        "CameraComponents" : {
+            "type" : "arrays",
+            "items" : {
+                "$ref" : "CameraComponentState.json"
+            }
+        },
+        "RenderUI" : {
+            "type" : "boolean"
+        }
+    }
+}

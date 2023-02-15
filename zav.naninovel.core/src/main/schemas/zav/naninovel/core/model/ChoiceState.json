@@ -1,0 +1,26 @@
+{
+    "type" : "object",
+    "properties" : {
+        "messageText" : {
+            "if" : "string"
+        },
+        "summary" : {
+            "type" : "string"
+        },
+        "buttonPath" : {
+            "type" : "string"
+        },
+        "buttonPosition" : {
+            "$ref" : "classpath:/zav/naninovel/core/model/unity/Vector2.json"
+        },
+        "overwriteButtonPosition" : {
+            "type" : "boolean"
+        },
+        "onSelectScript" : {
+            "type" : "string"
+        },
+        "autoPlay" : {
+            "type" : "boolean"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+name: 'Java deployment with Maven [master]'
+'on':
+  workflow_dispatch: null
+  release:
+    types:
+      - created
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare Build Environment
+        uses: actions/setup-java@v1
+        with:
+          maven-version: 3.8.6
+          java-version: 1.17
+      - name: Build with Maven
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        run: mvn clean verify -ntp -B -DskipTests
+      - name: Prepare Deploy Environment
+        uses: actions/setup-java@v1
+        with:
+          maven-version: 3.8.6
+          java-version: 1.17
+          server-id: github-deploy
+      - name: Deploy with Maven
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        run: mvn deploy -ntp -B -DskipTests

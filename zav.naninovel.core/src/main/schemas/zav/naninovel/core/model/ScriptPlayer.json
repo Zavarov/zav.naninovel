@@ -1,0 +1,20 @@
+{
+    "type" : "object",
+    "properties" : {
+        "Playing" : {
+            "type" : "boolean"
+        },
+        "ExecutedPlayedCommand" : {
+            "type" : "boolean"
+        },
+        "WaitingForInput" : {
+            "type" : "boolean"
+        },
+        "GosubReturnSpots" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "PlaybackSpot.json"
+            }
+        }
+    }
+}
