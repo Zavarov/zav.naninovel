@@ -105,6 +105,10 @@ public class SaveGame {
 		return gameStateMap.getSaveDateTime();
 	}
 
+	public void setSaveDateTime(Date saveDateTime) {
+		gameStateMap.setSaveDateTime(saveDateTime);
+	}
+
 	public ActorManager getBackgroundActor() {
 		return find(BACKGROUND_ACTOR, ActorManager.class);
 	}
