@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: NaniNovel UI Components
+Bundle-SymbolicName: zav.naninovel.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Export-Package: zav.naninovel.ui,
+ zav.naninovel.ui.adapter,
+ zav.naninovel.ui.tree,
+ zav.naninovel.ui.viewer,
+ zav.naninovel.ui.widgets
+Require-Bundle: org.eclipse.core.databinding.observable,
+ org.eclipse.core.databinding.property,
+ org.eclipse.core.runtime,
+ org.eclipse.jface,
+ org.eclipse.jface.databinding,
+ org.eclipse.swt,
+ zav.naninovel.core
+Automatic-Module-Name: zav.naninovel.ui
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-17

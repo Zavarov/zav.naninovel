@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.jface.viewers.TreeNode"
+            class="zav.naninovel.ui.adapter.TreeNodeAdapterFactory">
+         <adapter
+               type="java.lang.String">
+         </adapter>
+      </factory>
+      <factory
+            adaptableType="zav.naninovel.ui.tree.SaveGameTreeNode"
+            class="zav.naninovel.ui.adapter.SaveGameTreeNodeAdapterFactory">
+         <adapter
+               type="java.lang.String">
+         </adapter>
+      </factory>
+   </extension>
+
+</plugin>
