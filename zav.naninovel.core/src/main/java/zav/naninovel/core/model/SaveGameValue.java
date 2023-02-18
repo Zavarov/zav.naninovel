@@ -23,16 +23,17 @@ public class SaveGameValue {
 	}
 
 	public void setValue(String value) throws SaveGameException {
-		Object realValue = Platform.getAdapterManager().getAdapter(value, clazz);
+		Object oldValue = getter.get();
+		Object newValue = Platform.getAdapterManager().getAdapter(value, clazz);
 
-		if (realValue == null) {
+		if (newValue == null) {
 			throw new SaveGameException(value);
 		}
 
-		if (Objects.equals(realValue, getter.get())) {
+		if (Objects.equals(oldValue, newValue)) {
 			return;
 		}
 
-		setter.accept(realValue);
+		setter.accept(newValue);
 	}
 }
