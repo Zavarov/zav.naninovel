@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.SequenceInputStream;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ import zav.naninovel.core.model.ui.ChoiceHandlerPanel;
 import zav.naninovel.core.model.ui.VariableInputPanel;
 
 public class SaveGame {
+	protected static final byte[] UTF8_BOM = new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
 	// @formatter:off
 	protected static final GameState CUSTOM_VARIABLE_MANAGER = new GameState("Naninovel.CustomVariableManager+GameState", "Elringus.Naninovel.Runtime", null);
 	protected static final GameState INPUT_MANAGER = new GameState("Naninovel.InputManager+GameState", "Elringus.Naninovel.Runtime", null);
@@ -63,7 +66,7 @@ public class SaveGame {
 
 		this.om.registerModule(module);
 
-		this.gameStateMap = om.readValue(decompress(source, 3), GameStateMap.class);
+		this.gameStateMap = om.readValue(decompress(source), GameStateMap.class);
 
 		this.source = source;
 	}
@@ -178,9 +181,11 @@ public class SaveGame {
 	}
 
 	public static void compress(File file, byte[] source) throws IOException {
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(source)) {
+		// TODO
+		try (SequenceInputStream sis = new SequenceInputStream( //
+				new ByteArrayInputStream(UTF8_BOM), new ByteArrayInputStream(source))) {
 			// Deflater(x, true) -> no zlib header
-			try (InputStream is = new DeflaterInputStream(bais, new Deflater(Deflater.DEFAULT_COMPRESSION, true))) {
+			try (InputStream is = new DeflaterInputStream(sis, new Deflater(Deflater.DEFAULT_COMPRESSION, true))) {
 				try (FileOutputStream os = new FileOutputStream(file)) {
 					is.transferTo(os);
 				}
@@ -188,12 +193,17 @@ public class SaveGame {
 		}
 	}
 
-	public static byte[] decompress(File file, int offset) throws IOException {
+	public static byte[] decompress(File file) throws IOException {
 		try (FileInputStream fis = new FileInputStream(file)) {
 			// Inflater(true) -> no zlib header
 			try (InputStream is = new InflaterInputStream(fis, new Inflater(true))) {
 				try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
-					is.readNBytes(offset);
+					byte[] bom = is.readNBytes(3);
+
+					if (!Arrays.equals(bom, UTF8_BOM)) {
+						throw new IllegalArgumentException("Unrecognized BOM: " + Arrays.toString(bom));
+					}
+
 					os.write(is.readAllBytes());
 					return os.toByteArray();
 				}
