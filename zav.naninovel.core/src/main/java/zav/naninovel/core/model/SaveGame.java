@@ -71,6 +71,17 @@ public class SaveGame {
 		this.source = source;
 	}
 
+	public void save() {
+		try {
+			// Serialize all cached entities before saving
+			cache.forEach(this::put);
+
+			compress(source, om.writeValueAsBytes(gameStateMap));
+		} catch (IOException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
 	public String getName() {
 		return source.getName();
 	}
@@ -151,6 +162,20 @@ public class SaveGame {
 		return find(AUDIO_MANAGER, AudioManager.class);
 	}
 
+	protected <T> void put(GameState gameState, T value) {
+		List<String> keys = gameStateMap.getObjectJsonMap().getKeys();
+		List<Object> values = gameStateMap.getObjectJsonMap().getValues();
+
+		for (int i = 0; i < keys.size(); ++i) {
+			if (gameState.toString().equals(keys.get(i))) {
+				values.set(i, writeValue(value));
+				return;
+			}
+		}
+
+		throw new NoSuchElementException(gameState.toString());
+	}
+
 	protected <T> T find(GameState gameState, Class<T> clazz) {
 		Object value = cache.get(gameState);
 
@@ -175,6 +200,14 @@ public class SaveGame {
 	private <T> T readValue(String content, Class<T> target) {
 		try {
 			return om.readValue(content, target);
+		} catch (IOException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+	private <T> String writeValue(T object) {
+		try {
+			return om.writeValueAsString(object);
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
