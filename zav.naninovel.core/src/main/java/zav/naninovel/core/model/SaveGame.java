@@ -194,9 +194,9 @@ public class SaveGame {
 		throw new NoSuchElementException(gameState.toString());
 	}
 
-	private <T> T readValue(String source, Class<T> target) {
+	private <T> T readValue(String content, Class<T> target) {
 		try {
-			return om.readValue(source, target);
+			return om.readValue(content, target);
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
