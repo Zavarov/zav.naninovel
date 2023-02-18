@@ -21,11 +21,8 @@ import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import zav.naninovel.core.model.bluepharmac.InventoryUI;
-import zav.naninovel.core.model.internal.SerializableMapDeserializer;
-import zav.naninovel.core.model.internal.SerializableMapSerializer;
 import zav.naninovel.core.model.ui.BacklogPanel;
 import zav.naninovel.core.model.ui.ChoiceHandlerPanel;
 import zav.naninovel.core.model.ui.VariableInputPanel;
@@ -59,12 +56,6 @@ public class SaveGame {
 
 	public SaveGame(File source) throws IOException {
 		this.om = new ObjectMapper();
-
-		SimpleModule module = new SimpleModule();
-		module.addDeserializer(SerializableMap.class, new SerializableMapDeserializer());
-		module.addSerializer(SerializableMap.class, new SerializableMapSerializer());
-
-		this.om.registerModule(module);
 
 		this.gameStateMap = om.readValue(decompress(source), GameStateMap.class);
 
