@@ -68,31 +68,6 @@ public class SaveGame {
 		this.source = source;
 	}
 
-	public static void main(String[] args) throws IOException {
-		if (args.length < 1) {
-			throw new IllegalArgumentException("Please specify the path to the savegame as the first argument!");
-		}
-
-		SaveGame saveGame = new SaveGame(new File(args[0]));
-
-		System.out.println(saveGame.getBackgroundActor());
-		System.out.println(saveGame.getTextPrinterActor());
-		System.out.println(saveGame.getCharacterActor());
-		System.out.println(saveGame.getChoiceHandlerActor());
-		System.out.println(saveGame.getCustomVariableManager());
-		System.out.println(saveGame.getInventoryUI());
-		System.out.println(saveGame.getInputManager());
-		System.out.println(saveGame.getCharacterManager());
-		System.out.println(saveGame.getTextPrinterManager());
-		System.out.println(saveGame.getScriptPlayer());
-		System.out.println(saveGame.getBacklogPanel());
-		System.out.println(saveGame.getVariableInputPanel());
-		System.out.println(saveGame.getSpawnManager());
-		System.out.println(saveGame.getChoiceHandlerPanel());
-		System.out.println(saveGame.getCameraManager());
-		System.out.println(saveGame.getAudioManager());
-	}
-
 	public String getName() {
 		return source.getName();
 	}
