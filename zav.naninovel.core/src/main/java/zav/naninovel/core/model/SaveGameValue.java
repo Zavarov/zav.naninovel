@@ -25,8 +25,12 @@ public class SaveGameValue {
 	public void setValue(String value) throws SaveGameException {
 		Object realValue = Platform.getAdapterManager().getAdapter(value, clazz);
 
-		if (realValue == null || Objects.equals(realValue, getter.get())) {
+		if (realValue == null) {
 			throw new SaveGameException(value);
+		}
+
+		if (Objects.equals(realValue, getter.get())) {
+			return;
 		}
 
 		setter.accept(realValue);
