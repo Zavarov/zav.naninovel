@@ -3,13 +3,16 @@ Bundle-ManifestVersion: 2
 Bundle-Name: NaniNovel Core Components
 Bundle-SymbolicName: zav.naninovel.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: zav.naninovel.core.model,
+Export-Package: zav.naninovel.core.adapter,
+ zav.naninovel.core.model,
  zav.naninovel.core.model.bluepharmac,
  zav.naninovel.core.model.internal;x-internal:=true,
  zav.naninovel.core.model.ui,
  zav.naninovel.core.model.unity
 Require-Bundle: com.fasterxml.jackson.core.jackson-annotations,
  com.fasterxml.jackson.core.jackson-core,
- com.fasterxml.jackson.core.jackson-databind
+ com.fasterxml.jackson.core.jackson-databind,
+ org.eclipse.core.runtime
 Automatic-Module-Name: zav.naninovel.core
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
