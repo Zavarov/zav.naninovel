@@ -53,11 +53,13 @@ public class SaveGame {
 
 	// Convert each object only once...
 	private final Map<GameState, Object> cache = new HashMap<>();
+	private final RollbackStack stack;
 
 	public SaveGame(File source) throws IOException {
 		this.om = new ObjectMapper();
 
 		this.gameStateMap = om.readValue(decompress(source), GameStateMap.class);
+		this.stack = om.readValue(gameStateMap.getRollbackStackJson(), RollbackStack.class);
 
 		this.source = source;
 	}
@@ -66,6 +68,8 @@ public class SaveGame {
 		try {
 			// Serialize all cached entities before saving
 			cache.forEach(this::put);
+
+			gameStateMap.setRollbackStackJson(om.writeValueAsString(stack));
 
 			compress(source, om.writeValueAsBytes(gameStateMap));
 		} catch (IOException e) {
