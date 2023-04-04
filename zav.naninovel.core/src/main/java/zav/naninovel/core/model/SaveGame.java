@@ -77,6 +77,10 @@ public class SaveGame {
 		}
 	}
 
+	public RollbackStack getRollbackStack() {
+		return stack;
+	}
+
 	public String getName() {
 		return source.getName();
 	}
