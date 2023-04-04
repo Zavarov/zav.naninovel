@@ -30,12 +30,21 @@ public class SaveGameMapViewer {
 
 		TableViewerColumn valueColumn = new TableViewerColumn(viewer, SWT.NONE);
 		valueColumn.setLabelProvider(new SaveGameColumnLabelProvider(i -> values.get((int) i)));
-		valueColumn.setEditingSupport(new SaveGameEditingSupport(viewer, (i -> values.get((int) i))));
+		valueColumn.setEditingSupport(new SaveGameEditingSupport(viewer, (i -> values.get((int) i))) {
+			@Override
+			protected void setValue(Object element, Object value) {
+				super.setValue(element, valueColumn);
+				valueColumn.getColumn().pack();
+			}
+		});
 
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
 		viewer.setInput(range);
 
 		viewer.getTable().setLayout(new GridLayout(2, true));
 		viewer.getTable().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
+		keyColumn.getColumn().pack();
+		valueColumn.getColumn().pack();
 	}
 }
