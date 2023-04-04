@@ -5,6 +5,7 @@ Bundle-SymbolicName: zav.naninovel.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: zav.naninovel.ui,
  zav.naninovel.ui.adapter,
+ zav.naninovel.ui.internal.viewer;x-internal:=true,
  zav.naninovel.ui.tree,
  zav.naninovel.ui.viewer,
  zav.naninovel.ui.widgets

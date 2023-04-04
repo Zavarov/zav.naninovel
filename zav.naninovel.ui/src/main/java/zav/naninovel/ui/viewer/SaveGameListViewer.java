@@ -1,4 +1,4 @@
-package zav.naninovel.ui;
+package zav.naninovel.ui.viewer;
 
 import java.util.List;
 
@@ -16,8 +16,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
 
 import zav.naninovel.core.model.SaveGameValue;
-import zav.naninovel.ui.viewer.SaveGameColumnLabelProvider;
-import zav.naninovel.ui.viewer.SaveGameEditingSupport;
+import zav.naninovel.ui.SaveGameEditorPart;
+import zav.naninovel.ui.internal.viewer.SaveGameColumnLabelProvider;
+import zav.naninovel.ui.internal.viewer.SaveGameEditingSupport;
 
 public class SaveGameListViewer extends SaveGameEditorPart {
 	protected final TableViewer viewer;

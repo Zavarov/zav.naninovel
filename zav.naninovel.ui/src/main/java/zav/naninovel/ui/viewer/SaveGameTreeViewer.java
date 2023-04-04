@@ -1,4 +1,4 @@
-package zav.naninovel.ui;
+package zav.naninovel.ui.viewer;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetSideEffects;
@@ -15,7 +15,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TreeColumn;
 
-import zav.naninovel.ui.viewer.SaveGameTreeNodeEditingSupport;
+import zav.naninovel.ui.SaveGameEditorPart;
+import zav.naninovel.ui.internal.viewer.SaveGameTreeNodeEditingSupport;
 
 public class SaveGameTreeViewer extends SaveGameEditorPart {
 	protected final TreeViewer viewer;

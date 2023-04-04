@@ -1,4 +1,4 @@
-package zav.naninovel.ui.viewer;
+package zav.naninovel.ui.internal.viewer;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.EditingSupport;

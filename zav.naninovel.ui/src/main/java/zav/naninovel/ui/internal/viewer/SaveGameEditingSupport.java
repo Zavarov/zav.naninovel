@@ -1,4 +1,4 @@
-package zav.naninovel.ui.viewer;
+package zav.naninovel.ui.internal.viewer;
 
 import java.util.function.Function;
 
