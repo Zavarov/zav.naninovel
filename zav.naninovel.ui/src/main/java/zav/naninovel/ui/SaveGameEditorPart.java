@@ -6,7 +6,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
-public abstract class SaveGameEditorPart {
+public class SaveGameEditorPart {
 	protected final Composite control;
 
 	public SaveGameEditorPart(Composite parent) {
