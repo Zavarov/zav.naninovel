@@ -16,17 +16,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
 
 import zav.naninovel.core.model.SaveGameValue;
-import zav.naninovel.ui.SaveGameEditorPart;
 import zav.naninovel.ui.internal.viewer.SaveGameColumnLabelProvider;
 import zav.naninovel.ui.internal.viewer.SaveGameEditingSupport;
 
-public class SaveGameListViewer extends SaveGameEditorPart {
+public class SaveGameListViewer {
 	protected final TableViewer viewer;
 
 	public SaveGameListViewer(Composite parent, List<SaveGameValue> content) {
-		super(parent);
-
-		viewer = new TableViewer(control, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		viewer = new TableViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 
 		TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE);
 		viewerColumn.setLabelProvider(new SaveGameColumnLabelProvider());
@@ -38,16 +35,14 @@ public class SaveGameListViewer extends SaveGameEditorPart {
 		viewer.getTable().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		// Make sure that the table column takes up the entire viewer
-		IObservableValue<Rectangle> observable = WidgetProperties.bounds().observe(control);
+		IObservableValue<Rectangle> observable = WidgetProperties.bounds().observe(parent);
 
-		WidgetSideEffects.createFactory(control).create(() -> {
+		WidgetSideEffects.createFactory(parent).create(() -> {
 			TableColumn tableColumn = viewerColumn.getColumn();
 			Rectangle bounds = observable.getValue();
 
 			tableColumn.pack();
 			tableColumn.setWidth(Math.max(tableColumn.getWidth(), bounds.width));
 		});
-
-		postConstruct();
 	}
 }

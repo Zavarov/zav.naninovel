@@ -15,10 +15,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TreeColumn;
 
-import zav.naninovel.ui.SaveGameEditorPart;
 import zav.naninovel.ui.internal.viewer.SaveGameTreeNodeEditingSupport;
 
-public class SaveGameTreeViewer extends SaveGameEditorPart {
+public class SaveGameTreeViewer {
 	protected final TreeViewer viewer;
 
 	public SaveGameTreeViewer(Composite parent, TreeNode root) {
@@ -26,9 +25,7 @@ public class SaveGameTreeViewer extends SaveGameEditorPart {
 	}
 
 	public SaveGameTreeViewer(Composite parent, int level, TreeNode root) {
-		super(parent);
-
-		viewer = new TreeViewer(control, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		viewer = new TreeViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 
 		TreeViewerColumn viewerColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		// TODO
@@ -43,16 +40,14 @@ public class SaveGameTreeViewer extends SaveGameEditorPart {
 		viewer.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		// Make sure that the tree column takes up the entire viewer
-		IObservableValue<Rectangle> observable = WidgetProperties.bounds().observe(control);
+		IObservableValue<Rectangle> observable = WidgetProperties.bounds().observe(parent);
 
-		WidgetSideEffects.createFactory(control).create(() -> {
+		WidgetSideEffects.createFactory(parent).create(() -> {
 			TreeColumn treeColumn = viewerColumn.getColumn();
 			Rectangle bounds = observable.getValue();
 
 			treeColumn.pack();
 			treeColumn.setWidth(Math.max(treeColumn.getWidth(), bounds.width));
 		});
-
-		postConstruct();
 	}
 }
