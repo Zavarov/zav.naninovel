@@ -2,6 +2,10 @@ package zav.naninovel.core.adapter;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 
+/**
+ * Utility class for transforming objects of type {@link String} into
+ * {@link Double}, using the Eclipse adapters.
+ */
 public class DoubleAdapterFactory implements IAdapterFactory {
 
 	@Override

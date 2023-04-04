@@ -8,6 +8,10 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.Platform;
 
+/**
+ * Utility class for transforming objects of type {@link String} into any other
+ * serializable datatype, using the Eclipse adapters.
+ */
 public class StringAdapterFactory implements IAdapterFactory {
 	private static final ILog LOGGER = Platform.getLog(StringAdapterFactory.class);
 
