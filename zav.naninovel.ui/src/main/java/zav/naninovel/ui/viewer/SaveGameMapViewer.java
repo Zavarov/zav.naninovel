@@ -33,7 +33,7 @@ public class SaveGameMapViewer {
 		valueColumn.setEditingSupport(new SaveGameEditingSupport(viewer, (i -> values.get((int) i))) {
 			@Override
 			protected void setValue(Object element, Object value) {
-				super.setValue(element, valueColumn);
+				super.setValue(element, value);
 				valueColumn.getColumn().pack();
 			}
 		});
