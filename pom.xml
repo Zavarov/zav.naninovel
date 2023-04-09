@@ -140,6 +140,7 @@
                     <groupId>org.eclipse.tycho</groupId>
                     <artifactId>target-platform-configuration</artifactId>
                     <configuration>
+                        <requireEagerResolve>true</requireEagerResolve>
                         <target>
                             <artifact> 
                                 <groupId>zav.naninovel</groupId> 

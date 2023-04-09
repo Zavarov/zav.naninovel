@@ -1,8 +1,9 @@
 package zav.naninovel.ui.internal.viewer;
 
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
@@ -10,9 +11,10 @@ import org.eclipse.jface.viewers.TextCellEditor;
 
 import zav.naninovel.core.model.SaveGameException;
 import zav.naninovel.core.model.SaveGameValue;
-import zav.naninovel.ui.widgets.Attribute;
 
 public class SaveGameEditingSupport extends EditingSupport {
+	private static final Logger LOGGER = Logger.getLogger(SaveGameEditingSupport.class.getName());
+
 	private final CellEditor editor;
 	private final Function<Object, SaveGameValue> mapper;
 
@@ -48,7 +50,7 @@ public class SaveGameEditingSupport extends EditingSupport {
 			// Update UI with new value
 			getViewer().refresh(element);
 		} catch (SaveGameException e) {
-			Platform.getLog(Attribute.class).error(e.getLocalizedMessage(), e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }

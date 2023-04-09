@@ -11,11 +11,12 @@ Export-Package: zav.naninovel.ui,
  zav.naninovel.ui.widgets
 Require-Bundle: org.eclipse.core.databinding.observable,
  org.eclipse.core.databinding.property,
- org.eclipse.core.runtime,
+ org.eclipse.equinox.common,
+ org.eclipse.equinox.registry,
  org.eclipse.jface,
  org.eclipse.jface.databinding,
  org.eclipse.swt,
- org.eclipse.ui,
+ org.eclipse.ui.workbench,
  zav.naninovel.core
 Automatic-Module-Name: zav.naninovel.ui
 Bundle-ActivationPolicy: lazy

@@ -1,7 +1,9 @@
 package zav.naninovel.ui.widgets;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.databinding.swt.WidgetSideEffects;
 import org.eclipse.jface.databinding.swt.typed.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -16,6 +18,7 @@ import zav.naninovel.core.model.SaveGameException;
 import zav.naninovel.core.model.SaveGameValue;
 
 public class Attribute {
+	private static final Logger LOGGER = Logger.getLogger(Attribute.class.getName());
 
 	public Attribute(Composite parent, String title, SaveGameValue adapter) {
 		GridData gd = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).create();
@@ -39,7 +42,7 @@ public class Attribute {
 			try {
 				adapter.setValue(observable.getValue());
 			} catch (SaveGameException e) {
-				Platform.getLog(Attribute.class).error(e.getLocalizedMessage(), e);
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				// Revert to original value...
 				value.setText(adapter.getValue());
 			}

@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 import org.eclipse.core.databinding.observable.AbstractObservable;
 import org.eclipse.core.databinding.observable.ObservableTracker;
 import org.eclipse.core.databinding.observable.Realm;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Adapters;
 
 public class SaveGameValue extends AbstractObservable {
 	private final Class<?> clazz;
@@ -24,12 +24,12 @@ public class SaveGameValue extends AbstractObservable {
 
 	public String getValue() {
 		ObservableTracker.getterCalled(this);
-		return Platform.getAdapterManager().getAdapter(getter.get(), String.class);
+		return Adapters.adapt(getter.get(), String.class);
 	}
 
 	public void setValue(String value) throws SaveGameException {
 		Object oldValue = getter.get();
-		Object newValue = Platform.getAdapterManager().getAdapter(value, clazz);
+		Object newValue = Adapters.adapt(value, clazz);
 
 		if (newValue == null) {
 			throw new SaveGameException(value);

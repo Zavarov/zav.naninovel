@@ -3,17 +3,17 @@ package zav.naninovel.core.adapter;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.eclipse.core.runtime.IAdapterFactory;
-import org.eclipse.core.runtime.ILog;
-import org.eclipse.core.runtime.Platform;
 
 /**
  * Utility class for transforming objects of type {@link String} into any other
  * serializable datatype, using the Eclipse adapters.
  */
 public class StringAdapterFactory implements IAdapterFactory {
-	private static final ILog LOGGER = Platform.getLog(StringAdapterFactory.class);
+	private static final Logger LOGGER = Logger.getLogger(StringAdapterFactory.class.getName());
 
 	@Override
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
@@ -38,7 +38,7 @@ public class StringAdapterFactory implements IAdapterFactory {
 		} else if (adapterType == String.class) {
 			return adapterType.cast(source);
 		} else {
-			LOGGER.error("Unknown type " + adapterType, new IllegalArgumentException());
+			LOGGER.log(Level.SEVERE, "Unknown type " + adapterType, new IllegalArgumentException());
 			return null;
 		}
 	}
@@ -53,7 +53,7 @@ public class StringAdapterFactory implements IAdapterFactory {
 		try {
 			return clazz.cast(adapter.get());
 		} catch (NumberFormatException e) {
-			Platform.getLog(StringAdapterFactory.class).error(e.getLocalizedMessage(), e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
 	}
@@ -66,7 +66,7 @@ public class StringAdapterFactory implements IAdapterFactory {
 		try {
 			return clazz.cast(DateAdapterFactory.DATE_FORMAT.parse(source));
 		} catch (ParseException e) {
-			LOGGER.error(e.getLocalizedMessage(), e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
 	}

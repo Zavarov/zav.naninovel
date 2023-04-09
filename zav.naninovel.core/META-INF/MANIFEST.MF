@@ -11,8 +11,8 @@ Export-Package: zav.naninovel.core.adapter,
 Require-Bundle: com.fasterxml.jackson.core.jackson-annotations,
  com.fasterxml.jackson.core.jackson-core,
  com.fasterxml.jackson.core.jackson-databind,
- org.eclipse.core.runtime,
- org.eclipse.core.databinding.observable
+ org.eclipse.core.databinding.observable,
+ org.eclipse.equinox.common
 Automatic-Module-Name: zav.naninovel.core
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17

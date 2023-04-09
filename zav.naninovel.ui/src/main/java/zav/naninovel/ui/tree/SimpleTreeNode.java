@@ -1,6 +1,6 @@
 package zav.naninovel.ui.tree;
 
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jface.viewers.TreeNode;
 
 import zav.naninovel.core.model.SaveGameValue;
@@ -19,6 +19,6 @@ public class SimpleTreeNode extends TreeNode {
 
 	@Override
 	public String getValue() {
-		return Platform.getAdapterManager().getAdapter(value, String.class);
+		return Adapters.adapt(value, String.class);
 	}
 }

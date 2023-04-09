@@ -1,7 +1,7 @@
 package zav.naninovel.ui.adapter;
 
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IAdapterFactory;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.TreeNode;
 
 public class TreeNodeAdapterFactory implements IAdapterFactory {
@@ -15,7 +15,7 @@ public class TreeNodeAdapterFactory implements IAdapterFactory {
 			return adapterType.cast("");
 		}
 
-		T adaptee = Platform.getAdapterManager().getAdapter(value, adapterType);
+		T adaptee = Adapters.adapt(value, adapterType);
 
 		if (adaptee == null) {
 			return adapterType.cast("");
