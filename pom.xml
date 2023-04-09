@@ -242,6 +242,7 @@
             </properties>
         </profile>
         
+        <!--
         <profile>
             <id>generate-javadoc</id>
             <activation>
@@ -258,6 +259,7 @@
                 </plugins>
             </build>
         </profile>
+        -->
         
         <profile>
             <id>generate-model</id>
